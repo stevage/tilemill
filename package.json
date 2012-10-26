@@ -34,7 +34,7 @@
         "mapnik": "https://github.com/mapnik/node-mapnik/tarball/master",
         "tilelive": "~4.3.0",
         "mbtiles": "~0.2.6",
-        "tilelive-mapnik": "https://github.com/mapbox/tilelive-mapnik/tarball/async-issolid",
+        "tilelive-mapnik": "https://github.com/mapbox/tilelive-mapnik/tarball/image-pool",
         "carto": "https://github.com/mapbox/carto/tarball/master",
         "millstone": "https://github.com/mapbox/millstone/tarball/master",
         "sphericalmercator": "~1.0.2",
