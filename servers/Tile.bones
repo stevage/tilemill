@@ -24,7 +24,7 @@ server.prototype.initialize = function() {
     this.enable('jsonp callback');
     this.use(this.cors);
     this.all('/tile/:id.mbtiles/:z/:x/:y.:format(png|grid.json)', this.mbtiles);
-    this.all('/tile/:id/:z/:x/:y.:format(png|grid.json|data)', this.load);
+    this.all('/tile/:id/:z/:x/:y.:format(png|grid.json|data|data.json)', this.load);
     this.all('/tile/:id/thumb.png', this.thumb);
     this.get('/tile/:id/project-status', this.projectStatus);
     this.all('/datasource/:id', this.datasource);
@@ -66,7 +66,7 @@ server.prototype.load = function(req, res, next) {
             scale: req.query.scale|0 || 1,
             metatile: req.query.metatile|0 || 2,
             // Creates separate sources for the same map if format is data.
-            data: req.params.format === 'data' ? 1 : 0
+            data: req.params.format.indexOf('data') === 0 ? req.params.format : 0
         },
         // Need not be set for a cache hit. Once the cache is
         // warmed the project need not be loaded/localized again.
@@ -99,7 +99,7 @@ server.prototype.load = function(req, res, next) {
         // This format override does not have adverse side effects
         // because the tilelive-mapnik  cache is segmented by the data
         // key in the querystring above.
-        if (req.params.format === 'data') source._info.format = 'data';
+        if (req.params.format.indexOf('data') === 0) source._info.format = req.params.format;
         source[fn](z, x, y, function(err, tile, headers) {
             if (err) return next(new Error.HTTP(err.message, 404));
             if (res.cache) fs.writeFile(res.cache, tile);
