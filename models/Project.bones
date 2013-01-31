@@ -34,7 +34,7 @@ model.prototype.schema = {
         // https://github.com/mapbox/tilelive-mapnik/issues/4
         'format': {
             'type': 'string',
-            'pattern': 'png(8|256)?(:.*)?|jpeg|jpeg[\d]{2}'
+            'pattern': 'png(8|256)?(:.*)?|jpeg|jpeg[\d]{2}|data'
         },
         'interactivity': {
             'type': ['object', 'boolean']
