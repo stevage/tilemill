@@ -97,6 +97,12 @@ command.options['concurrency'] = {
     'default': 4
 };
 
+command.options['datatiles'] = {
+    'title': 'datatiles=[1|0]',
+    'description': 'Export datatiles instead of image tiles.',
+    'default': 0
+};
+
 command.prototype.initialize = function(plugin, callback) {
     _(this).bindAll('error', 'put', 'complete');
 
@@ -210,6 +216,10 @@ command.prototype.initialize = function(plugin, callback) {
                 l.attributes.Datasource.max_size = require('os').cpus().length;
         });
         if (!cmd.opts.quiet) process.stderr.write('Localizing project...');
+
+        // Override output format to datatiles if specified.
+        if (opts.datatiles) model.set({'format':'data'});
+
         model.localize(model.toJSON(), this);
     }, function(err) {
         if (err) return cmd.error(err, function() {
