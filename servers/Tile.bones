@@ -24,7 +24,7 @@ server.prototype.initialize = function() {
     this.enable('jsonp callback');
     this.use(this.cors);
     this.all('/tile/:id.mbtiles/:z/:x/:y.:format(png|grid.json)', this.mbtiles);
-    this.all('/tile/:id/:z/:x/:y.:format(png|grid.json|data|data.json)', this.load);
+    this.all('/tile/:id/:z/:x/:y.:format(png|grid.json|data|data.json|data.png)', this.load);
     this.all('/tile/:id/thumb.png', this.thumb);
     this.get('/tile/:id/project-status', this.projectStatus);
     this.all('/datasource/:id', this.datasource);
