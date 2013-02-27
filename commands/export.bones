@@ -218,7 +218,7 @@ command.prototype.initialize = function(plugin, callback) {
         if (!cmd.opts.quiet) process.stderr.write('Localizing project...');
 
         // Override output format to datatiles if specified.
-        if (opts.datatiles) model.set({'format':'data'});
+        if (opts.datatiles) model.set({'format':'data','metatile':1});
 
         model.localize(model.toJSON(), this);
     }, function(err) {
