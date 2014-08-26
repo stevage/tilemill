@@ -346,3 +346,19 @@ model.prototype.thumb = function() {
     return this.get('tiles')[0].replace('{z}/{x}/{y}','thumb');
 };
 
+//## Steve
+model.prototype.clearAllExtents = function() {
+    this.get('Layer').models.forEach(function(l) {
+        var ds = l.get('Datasource');
+        if (ds && ds.extent_cache == "auto") {
+            ds.extent="";
+            l.set({'Datasource': ds}); //.set({extent: ""});
+            /*ds.save({extent: ""}, 
+                { error: function(e) { console.log(e); }  }
+            
+            );*/
+
+        }
+    });
+    
+}

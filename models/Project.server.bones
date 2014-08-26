@@ -118,6 +118,7 @@ models.Project.prototype.save = _(Backbone.Model.prototype.save)
     });
 });
 
+
 // Flush the cache for a project's layer.
 function flushProject(model, callback) {
     if (!model.options || !model.options.layer)

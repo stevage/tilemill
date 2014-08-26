@@ -39,6 +39,7 @@ controller.prototype.routes = {
     '/project/:id/export': 'projectExport',
     '/project/:id/export/:format': 'projectExport',
     '/project/:id/settings': 'projectSettings',
+    '/project/:id/clearextents': 'projectClearExtents',
     '/oauth/success': 'oauthSuccess',
     '/oauth/error': 'oauthError',
     '/manual': 'manual',
@@ -90,6 +91,16 @@ controller.prototype.projectExport = function(id, format) {
             $('.actions a[href=#exports]').click();
         }
     }).bind(this));
+};
+ // ## Steve
+controller.prototype.projectClearExtents = function(id) {
+    (new models.Project({ id: id })).fetch({
+        success: function(model) {
+            // for each layer, if there is a datasource with an extents, clear it, then save the lot.
+        },
+        error: function(m, e) { new views.Modal(e); }
+    });
+    
 };
 
 controller.prototype.projectSettings = function(id, format) {
